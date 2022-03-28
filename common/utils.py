@@ -84,8 +84,6 @@ class HDF5Dataset(Dataset):
         u = self.data[self.dataset][idx]
         x = self.data['x'][idx]
         t = self.data['t'][idx]
-        dx = self.data['dx'][idx]
-        dt = self.data['dt'][idx]
 
         if str(self.pde) == 'Heat':
             X = to_coords(torch.tensor(x), torch.tensor(t))
@@ -115,18 +113,17 @@ class HDF5Dataset(Dataset):
             dt = X[1, 0, 1] - X[0, 0, 1]
 
         else:
-            if self.mode == "train":
-                X = to_coords(torch.tensor(x), torch.tensor(t))
-                sol = (torch.tensor(u), X)
+            X = to_coords(torch.tensor(x), torch.tensor(t))
+            sol = (torch.tensor(u), X)
 
-                # Data augmentation using the defined generators for the equation at hand
-                if self.augmentation is not None:
-                    sol = self.augmentation(sol, self.shift)
+            # Data augmentation using the defined generators for the equation at hand
+            if self.mode == "train" and self.augmentation is not None:
+                sol = self.augmentation(sol, self.shift)
 
-                u = sol[0]
-                X = sol[1]
-                dx = X[0, 1, 0] - X[0, 0, 0]
-                dt = X[1, 0, 1] - X[0, 0, 1]
+            u = sol[0]
+            X = sol[1]
+            dx = X[0, 1, 0] - X[0, 0, 0]
+            dt = X[1, 0, 1] - X[0, 0, 1]
 
         return u.float(), dx.float(), dt.float()
 
