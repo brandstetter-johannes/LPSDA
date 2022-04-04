@@ -174,7 +174,9 @@ def main(args: argparse):
         train_loader = DataLoader(train_dataset,
                                   batch_size=args.batch_size,
                                   shuffle=True,
-                                  num_workers=4)
+                                  num_workers=4,
+                                  persistent_workers=True,
+                                  pin_memory=True)
 
         valid_dataset = HDF5Dataset(valid_string,
                                     mode='valid',
@@ -185,7 +187,9 @@ def main(args: argparse):
         valid_loader = DataLoader(valid_dataset,
                                   batch_size=args.batch_size,
                                   shuffle=False,
-                                  num_workers=4)
+                                  num_workers=4,
+                                  persistent_workers=True,
+                                  pin_memory=True)
 
         test_dataset = HDF5Dataset(test_string,
                                    mode='test',
@@ -196,7 +200,9 @@ def main(args: argparse):
         test_loader = DataLoader(test_dataset,
                                  batch_size=args.batch_size,
                                  shuffle=False,
-                                 num_workers=4)
+                                 num_workers=4,
+                                 persistent_workers=True,
+                                 pin_memory=True)
     except:
         raise Exception("Datasets could not be loaded properly")
 
