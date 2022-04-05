@@ -163,8 +163,8 @@ class DataCreator(nn.Module):
             torch.Tensor: neural network input data
             torch.Tensor: neural network labels
         """
-        data = torch.Tensor()
-        labels = torch.Tensor()
+        data = []
+        labels = []
         # Loop over batch and different starting points
         # For every starting point, we take the number of time_history points as training data
         # and the number of time future data as labels
@@ -175,9 +175,7 @@ class DataCreator(nn.Module):
             target_end_time = target_start_time + self.time_future
             l = dp[target_start_time:target_end_time]
 
-            data = torch.cat((data, d[None, :]), 0)
-            labels = torch.cat((labels, l[None, :]), 0)
+            data.append(d.unsqueeze(dim=0))
+            labels.append(l.unsqueeze(dim=0))
 
-        return data, labels
-
-
+        return torch.cat(data, dim=0), torch.cat(labels, dim=0)
