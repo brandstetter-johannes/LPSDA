@@ -4,6 +4,7 @@ Johannes Brandstetter, Max Welling, Daniel Worrall
 
 <a href="https://arxiv.org/abs/2202.07643">Link to the paper</a>
 
+If you find our work and/or our code useful, please cite us via:
 ```bibtex
 @article{brandstetter2022lie,
   title={Lie Point Symmetry Data Augmentation for Neural PDE Solvers},

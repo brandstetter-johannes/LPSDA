@@ -120,7 +120,7 @@ class FNO1d(nn.Module):
             dt (torch.Tensor): temporal distances
         Returns: torch.Tensor: output has the shape [batch, time_future, x]
         """
-        #TODO: rewrite training method and forward pass without permutation
+        # TODO: rewrite training method and forward pass without permutation
         # [b, x, c] = [b, x, t+2]
         x = torch.cat((u, dx[:, None, None].to(u.device).repeat(1, self.pde.nx, 1),
                        dt[:, None, None].repeat(1, self.pde.nx, 1).to(u.device)), -1)
