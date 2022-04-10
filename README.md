@@ -24,7 +24,7 @@ source environment.sh
 
 ### Notebooks
 
-Have a look into our jupyter notebooks to get an idea about data generation and Lie point symmetry data augmentation.
+Have a look into our jupyter notebooks to get an idea how we do the data generation and how we apply Lie point symmetry data augmentation.
 
 ### Produce datasets for Korteweg-de Vries (KdV) equation 
 `python generate/generate_data.py --experiment=KdV --train_samples=512 --valid_samples=512 --test_samples=512 --L=128`
