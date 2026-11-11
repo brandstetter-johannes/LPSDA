@@ -42,6 +42,12 @@ We used easier datasets for training the Resnet or the CNN model since these mod
 
 `python generate/generate_data.py --experiment=KS --train_samples=512 --valid_samples=512 --test_samples=512 --L=64 --nt=500`
 
+### Faster, reproducible generation
+
+Trajectories are solved one at a time by default. `--num_workers` solves them in parallel processes, and `--seed` makes every trajectory reproducible; with a seed, the data is identical for any number of workers. This works for all equations:
+
+`python generate/generate_data.py --experiment=KS --train_samples=512 --valid_samples=512 --test_samples=512 --L=64 --nt=500 --num_workers=32 --seed=0`
+
 ### Produce datasets for Burgers' equation
 
 Trajectories are generated for the Heat equation and then transformed via the Cole-Hopf transformation into the Burgers' equation.
